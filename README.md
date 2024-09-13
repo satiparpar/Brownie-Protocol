@@ -1,5 +1,5 @@
 
-### ProtocolContract - Proof of Liquidity Integration
+# ProtocolContract - Proof of Liquidity Integration
 
 This repository contains the ProtocolContract, a smart contract designed to integrate Berachain's Proof of Liquidity (PoL) system for protocols that do not naturally produce ERC20 receipt tokens.
 
