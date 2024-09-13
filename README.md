@@ -1,11 +1,10 @@
 
-# ProtocolContract - Proof of Liquidity Integration
+# Proof of Liquidity Integration Guide for Non-ERC20 Protocols on Berachain
 
 This repository contains the ProtocolContract, a smart contract designed to integrate Berachain's Proof of Liquidity (PoL) system for protocols that do not naturally produce ERC20 receipt tokens.
 
 ## Overview
-The ProtocolContract allows users to earn $BERA rewards by staking a dummy token. This approach is beneficial for protocols that need to track user activity internally and cannot directly mint ERC20 receipt tokens.
-
+The Proof of Liquidity Integration Guide for Non-ERC20 Protocols explains how to incorporate Berachain's PoL system for protocols that do not produce ERC20 receipt tokens. It details a method where a dummy StakingToken is created to track user balances, allowing protocols like perpetual futures exchanges to reward users with $BERA for opening positions. This approach involves minting and burning the dummy token through the ProtocolContract, enabling participation in PoL and enhancing incentive efficiencies. Note that this is one of several potential solutions for integrating PoL.
 
 ## Key functions of the contract:
 
