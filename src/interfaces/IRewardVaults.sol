@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.19;
 
 interface IBerachainRewardsVault {
@@ -9,7 +11,11 @@ interface IBerachainRewardsVault {
         address account
     ) external view returns (uint256);
 
-    function balanceOf(address account) external returns (uint256);
+    function balanceOf(address account) external view returns (uint256);
+
+    function getReward(address account) external returns (uint256);
+
+    function setOperator(address _operator) external;
 }
 
 interface IBerachainRewardsVaultFactory {
