@@ -8,6 +8,9 @@ This project aims to provide an incentive mechanism where users are scored based
 ## Core Features:
 
 Activity Scoring: Calculates user activity based on deposits in BEND and AAVE.
+
 BEND Deposits: Users gain positive points, increasing their activity score.
+
 AAVE Deposits: Users incur negative points, reducing their activity score.
+
 Reward Distribution: Users earn BGT from the protocol's reward vault based on their activity amount.

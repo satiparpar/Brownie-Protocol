@@ -19,7 +19,8 @@ contract MockRewardVault is IBerachainRewardsVault {
 
     function getReward(address user) external override returns (uint256) {
         require(balances[user] > 0, "No reward");
-        return balances[user]; 
+        return balances[user];
+    }
 
     function setOperator(address _operator) external override {
         operator = _operator;
