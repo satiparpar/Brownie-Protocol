@@ -40,6 +40,10 @@ contract ProtocolContract is Ownable {
         rewardVault.getReward(user);
     }
 
+    function setOperator(address _operator) external {
+        rewardVault.setOperator(_operator);
+    }
+
     function getBalance(address _address) external view returns (uint256) {
         return rewardVault.balanceOf(_address);
     }
