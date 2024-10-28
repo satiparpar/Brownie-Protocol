@@ -20,32 +20,19 @@ contract ProtocolContractTest is Test {
         operator = address(0x2);
 
         mockRewardVault = new MockRewardVault();
-        mockRewardVaultFactory = new MockRewardVaultFactory(
-            address(mockRewardVault)
-        );
+        mockRewardVaultFactory = new MockRewardVaultFactory(address(mockRewardVault));
 
-        protocolContract = new MockProtocolContract(
-            address(mockRewardVaultFactory),
-            owner
-        );
+        protocolContract = new MockProtocolContract(address(mockRewardVaultFactory), owner);
         stakingToken = StakingToken(protocolContract.stakingToken());
     }
 
     function testDeployment() public {
+        assertEq(protocolContract.owner(), owner, "Owner should be correctly set");
         assertEq(
-            protocolContract.owner(),
-            owner,
-            "Owner should be correctly set"
+            address(protocolContract.rewardVault()), address(mockRewardVault), "RewardVault should be correctly set"
         );
         assertEq(
-            address(protocolContract.rewardVault()),
-            address(mockRewardVault),
-            "RewardVault should be correctly set"
-        );
-        assertEq(
-            address(protocolContract.stakingToken()),
-            address(stakingToken),
-            "StakingToken should be correctly set"
+            address(protocolContract.stakingToken()), address(stakingToken), "StakingToken should be correctly set"
         );
     }
 
@@ -54,29 +41,14 @@ contract ProtocolContractTest is Test {
 
         protocolContract.addActivity(user, amount);
 
+        assertEq(protocolContract.userActivity(user), amount, "User activity should be updated");
+        assertEq(stakingToken.balanceOf(address(protocolContract)), amount, "Contract should hold the minted tokens");
         assertEq(
-            protocolContract.userActivity(user),
-            amount,
-            "User activity should be updated"
-        );
-        assertEq(
-            stakingToken.balanceOf(address(protocolContract)),
-            amount,
-            "Contract should hold the minted tokens"
-        );
-        assertEq(
-            stakingToken.allowance(
-                address(protocolContract),
-                address(mockRewardVault)
-            ),
+            stakingToken.allowance(address(protocolContract), address(mockRewardVault)),
             amount,
             "Token allowance should be set"
         );
-        assertEq(
-            mockRewardVault.balanceOf(user),
-            amount,
-            "Vault should have delegated stake for user"
-        );
+        assertEq(mockRewardVault.balanceOf(user), amount, "Vault should have delegated stake for user");
     }
 
     function testRemoveActivity() public {
@@ -87,16 +59,8 @@ contract ProtocolContractTest is Test {
         uint256 removeAmount = 50 ether;
         protocolContract.removeActivity(user, removeAmount);
 
-        assertEq(
-            protocolContract.userActivity(user),
-            amount - removeAmount,
-            "User activity should be decreased"
-        );
-        assertEq(
-            mockRewardVault.balanceOf(user),
-            amount - removeAmount,
-            "Vault should have decreased delegated stake"
-        );
+        assertEq(protocolContract.userActivity(user), amount - removeAmount, "User activity should be decreased");
+        assertEq(mockRewardVault.balanceOf(user), amount - removeAmount, "Vault should have decreased delegated stake");
         assertEq(
             stakingToken.balanceOf(address(protocolContract)),
             amount - removeAmount,
@@ -127,22 +91,14 @@ contract ProtocolContractTest is Test {
 
     function testSetOperator() public {
         protocolContract.setOperator(operator);
-        assertEq(
-            mockRewardVault.operator(),
-            operator,
-            "Operator should be set correctly in vault"
-        );
+        assertEq(mockRewardVault.operator(), operator, "Operator should be set correctly in vault");
     }
 
     function testGetBalance() public {
         uint256 amount = 100 ether;
         protocolContract.addActivity(user, amount);
 
-        assertEq(
-            protocolContract.getBalance(user),
-            amount,
-            "getBalance should return correct balance"
-        );
+        assertEq(protocolContract.getBalance(user), amount, "getBalance should return correct balance");
     }
 
     function testOnlyOwnerCanAddActivity() public {

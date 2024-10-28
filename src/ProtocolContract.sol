@@ -15,8 +15,7 @@ contract ProtocolContract is Ownable {
     constructor(address _vaultFactory) Ownable(msg.sender) {
         stakingToken = new StakingToken();
 
-        address vaultAddress = IBerachainRewardsVaultFactory(_vaultFactory)
-            .createRewardsVault(address(stakingToken));
+        address vaultAddress = IBerachainRewardsVaultFactory(_vaultFactory).createRewardsVault(address(stakingToken));
 
         rewardVault = IBerachainRewardsVault(vaultAddress);
     }

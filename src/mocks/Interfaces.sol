@@ -30,9 +30,7 @@ contract MockRewardVault is IBerachainRewardsVault {
         return balances[user];
     }
 
-    function getTotalDelegateStaked(
-        address user
-    ) external view override returns (uint256) {
+    function getTotalDelegateStaked(address user) external view override returns (uint256) {
         return balances[user];
     }
 }

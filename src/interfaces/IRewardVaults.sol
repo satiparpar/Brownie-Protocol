@@ -7,9 +7,7 @@ interface IBerachainRewardsVault {
 
     function delegateWithdraw(address account, uint256 amount) external;
 
-    function getTotalDelegateStaked(
-        address account
-    ) external view returns (uint256);
+    function getTotalDelegateStaked(address account) external view returns (uint256);
 
     function balanceOf(address account) external view returns (uint256);
 
@@ -19,7 +17,5 @@ interface IBerachainRewardsVault {
 }
 
 interface IBerachainRewardsVaultFactory {
-    function createRewardsVault(
-        address stakingToken
-    ) external returns (address);
+    function createRewardsVault(address stakingToken) external returns (address);
 }

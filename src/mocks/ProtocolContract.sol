@@ -6,10 +6,7 @@ import "../ProtocolContract.sol";
 contract MockProtocolContract is ProtocolContract {
     address private mockOwner;
 
-    constructor(
-        address _vaultFactory,
-        address _mockOwner
-    ) ProtocolContract(_vaultFactory) {
+    constructor(address _vaultFactory, address _mockOwner) ProtocolContract(_vaultFactory) {
         mockOwner = _mockOwner;
     }
 
