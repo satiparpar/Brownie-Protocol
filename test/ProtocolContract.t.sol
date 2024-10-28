@@ -26,7 +26,7 @@ contract ProtocolContractTest is Test {
         stakingToken = StakingToken(protocolContract.stakingToken());
     }
 
-    function testDeployment() public {
+    function testDeployment() public view {
         assertEq(protocolContract.owner(), owner, "Owner should be correctly set");
         assertEq(
             address(protocolContract.rewardVault()), address(mockRewardVault), "RewardVault should be correctly set"
